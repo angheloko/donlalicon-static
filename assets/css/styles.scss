@@ -1,5 +1,13 @@
+body {
+  @apply text-gray-800;
+}
+
 h1 {
-  @apply text-4xl font-serif mb-4;
+  @apply text-4xl font-serif;
+}
+
+h2 {
+  @apply text-2xl;
 }
 
 a {
@@ -11,7 +19,7 @@ a:hover {
 }
 
 p {
-  @apply my-4;
+  @apply mb-4;
 }
 
 ul,
@@ -33,29 +41,44 @@ li > ul {
   margin: 0;
 }
 
-pre code {
-  @apply my-4;
-}
-
-p code {
-  display: inline-block;
-  @apply bg-gray-300 text-sm p-1 rounded-sm font-semibold;
-}
-
 blockquote {
   @apply border-l-4 border-gray-600 italic pl-4;
 }
 
-.nuxt-content {
-  h1 {
-    @apply text-2xl font-serif mb-4;
-  }
+figcaption {
+  @apply text-sm text-gray-700 text-center;
 }
 
 .nuxt-content-highlight {
-  @apply relative;
+  @apply relative mb-4;
 }
 .nuxt-content-highlight .filename {
   @apply absolute right-0 text-gray-600 z-10 mr-2 mt-2 text-sm;
 }
 
+.blog {
+  @apply p-4 max-w-screen-md mx-auto;
+
+  h2 {
+    @apply text-gray-700;
+  }
+
+  &__date {
+    @apply text-sm text-gray-600;
+  }
+  &__content {
+    @apply my-8;
+
+    h1 {
+      @apply text-2xl font-serif mb-2;
+    }
+
+    h2 {
+      @apply text-xl mb-2;
+    }
+
+    h3 {
+      @apply text-lg mb-2;
+    }
+  }
+}
