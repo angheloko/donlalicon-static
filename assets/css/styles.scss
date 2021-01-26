@@ -56,9 +56,37 @@ figcaption {
   @apply absolute right-0 text-gray-600 z-10 mr-2 mt-2 text-sm;
 }
 
-.blog {
-  @apply p-4 max-w-screen-md mx-auto;
+.page-wrapper {
+  @apply flex flex-col min-h-screen;
 
+  header {
+    @apply p-4 border-b shadow-sm fixed w-full z-10 bg-white;
+  }
+
+  main {
+    @apply flex-grow pt-24 pb-8 px-4 max-w-screen-md mx-auto;
+  }
+
+  footer {
+    @apply flex text-sm text-gray-700 justify-center p-4 bg-gray-100;
+
+    a.social {
+      @apply h-6 w-6 ml-2;
+      svg {
+        @apply fill-current;
+      }
+    }
+  }
+}
+
+.site-name {
+  @apply font-mono font-bold text-2xl text-gray-800 no-underline;
+  &:hover {
+    @apply text-gray-800;
+  }
+}
+
+.blog {
   h2 {
     @apply text-gray-700;
   }
