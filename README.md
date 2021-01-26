@@ -1,4 +1,6 @@
-# donlalicon_static
+# donlalicon.dev
+
+A static blog built with Nuxt.js
 
 ## Build Setup
 
