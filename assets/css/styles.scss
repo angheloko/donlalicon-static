@@ -2,18 +2,6 @@ h1 {
   @apply text-4xl font-serif mb-4;
 }
 
-h2 {
-  @apply text-2xl font-serif mb-4;
-}
-
-h3 {
-  @apply text-xl mb-4;
-}
-
-h4, h5, h6 {
-  @apply text-base font-black;
-}
-
 a {
   @apply text-blue-500 underline;
 }
@@ -57,3 +45,17 @@ p code {
 blockquote {
   @apply border-l-4 border-gray-600 italic pl-4;
 }
+
+.nuxt-content {
+  h1 {
+    @apply text-2xl font-serif mb-4;
+  }
+}
+
+.nuxt-content-highlight {
+  @apply relative;
+}
+.nuxt-content-highlight .filename {
+  @apply absolute right-0 text-gray-600 z-10 mr-2 mt-2 text-sm;
+}
+

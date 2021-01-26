@@ -9,6 +9,10 @@
     <div>
       {{ blog.createdAt | toDate }}
     </div>
+    <figure>
+      <img :src="blog.cover.image" :alt="blog.cover.alt">
+      <figcaption>{{ blog.cover.caption }}</figcaption>
+    </figure>
     <nuxt-content :document="blog" />
   </article>
 </template>
