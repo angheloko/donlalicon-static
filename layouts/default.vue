@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col min-h-screen">
-    <header class="p-4 border-b shadow-sm fixed w-full z-10 bg-white flex justify-between items-center">
+    <header class="p-4 border-b shadow-sm fixed w-full z-10 bg-white flex items-center sm:justify-between lg:justify-around">
       <NuxtLink to="/" class="font-mono font-bold text-2xl text-gray-800 no-underline hover:text-gray-800">
         // donlalicon.dev
       </NuxtLink>

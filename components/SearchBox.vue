@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{ 'w-full': isFocused }"
-    class="absolute right-0 px-4 sm:relative sm:px-0 sm:w-auto sm:relative"
+    class="absolute right-0 px-4 sm:relative sm:px-0 sm:w-1/3 sm:relative"
   >
     <div class="w-full">
       <input
