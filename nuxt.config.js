@@ -4,7 +4,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'donlalicon_static',
+    title: 'Don Lalicon - Codesmith',
+    titleTemplate: '%s - donlalicon.dev',
     meta: [
       { charset: 'utf-8' },
       {
@@ -14,7 +15,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: ''
+        content: 'A personal blog about building stuff with code.'
       }
     ],
     link: [

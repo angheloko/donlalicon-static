@@ -1,5 +1,7 @@
 {
-  "name": "donlalicon_static",
+  "name": "donlalicon.dev",
+  "description": "A personal blog about building stuff with code.",
+  "author": "Don Lalicon",
   "version": "1.0.0",
   "private": true,
   "scripts": {

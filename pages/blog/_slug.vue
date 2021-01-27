@@ -9,11 +9,9 @@
     <div class="text-sm text-gray-600">
       {{ blog.createdAt | toDate }}
     </div>
-    <figure class="my-4">
+    <figure v-if="blog.cover" class="my-4">
       <img :src="blog.cover.image" :alt="blog.cover.alt">
-      <figcaption>
-        {{ blog.cover.caption }}
-      </figcaption>
+      <figcaption v-html="blog.cover.caption" />
     </figure>
     <nav>
       <ul class="px-4 my-4">
@@ -36,6 +34,80 @@ export default {
     const blog = await $content('blog', params.slug).fetch()
 
     return { blog }
+  },
+  head () {
+    const url = `https://donlalicon.dev/blog/${this.blog.slug}`
+
+    const dateCreated = new Date(this.blog.createdAt)
+    const dateChanged = new Date(this.blog.updatedAt)
+
+    const structuredData = {
+      '@type': 'Article',
+      datePublished: dateCreated.toISOString(),
+      dateModified: dateChanged.toISOString(),
+      headline: this.blog.title,
+      image: this.blog.cover.image
+    }
+
+    const head = {
+      title: this.blog.title,
+      link: [
+        {
+          rel: 'canonical',
+          href: url
+        }
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+          json: structuredData
+        }
+      ],
+      meta: [
+        {
+          hid: 'og:url',
+          name: 'og:url',
+          property: 'og:url',
+          content: url
+        },
+        {
+          hid: 'og:title',
+          name: 'og:title',
+          property: 'og:title',
+          content: `${this.blog.title} - donlalicon.dev`
+        }
+      ]
+    }
+
+    let description = this.blog.title
+    if (this.blog.description) {
+      description = this.blog.description
+    }
+
+    head.meta.push(
+      {
+        hid: 'description',
+        name: 'description',
+        content: description
+      },
+      {
+        hid: 'og:description',
+        name: 'og:description',
+        property: 'og:description',
+        content: description
+      }
+    )
+
+    if (this.blog.imageUrl) {
+      head.meta.push({
+        hid: 'og:image',
+        name: 'og:image',
+        property: 'og:image',
+        content: this.blog.imageUrl
+      })
+    }
+
+    return head
   }
 }
 </script>
