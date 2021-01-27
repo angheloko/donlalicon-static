@@ -53,7 +53,7 @@ The [serverMiddleware](https://nuxtjs.org/api/configuration-servermiddleware#the
 
 In order to handle requests to `/sitemap.xml`, I added the custom middleware to the serverMiddleware property of the `nuxt.config.js` like so:
 
-```
+```js[nuxt.config.js]
 serverMiddleware: [
   {
     path: '/sitemap.xml',
@@ -65,11 +65,9 @@ serverMiddleware: [
 Request handler
 ---------------
 
-For reusability purposes, we created a small Javascript to import and initialise Firebase admin:
+For reusability purposes, we created a small Javascript to import and initialise Firebase admin `serverMiddleware/firebase-admin.js`:
 
-`serverMiddleware/firebase-admin.js`
-
-```
+```js[serverMiddleware/firebase-admin.js]
 const admin = require('firebase-admin')
 module.exports = admin.initializeApp({
   credential: admin.credential.applicationDefault()
@@ -80,11 +78,9 @@ I initialised the Firebase Admin SDK using the [default application credentials]
 
 Alternatively, you can generate a service account key and set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable, or you can explicitly pass the path to the service account key in code.
 
-Below is the main code that will generate our sitemap:
+Below is the main code that will generate our sitemap `serverMiddleware/sitemap.js`:
 
-`serverMiddleware/sitemap.js`
-
-```
+```js[serverMiddleware/sitemap.js]
 const { createGzip } = require('zlib')
 const { SitemapStream, streamToPromise } = require('sitemap')
 const app = require('./firebase-admin')
@@ -126,12 +122,9 @@ export default function (req, res, next) {
 This code does a number of things:
 
 1.  Query the "blogs" collection for all published articles and sort the result by the creation date.
-    
 2.  Add the records to the sitemap.
-    
 3.  Return the sitemap with the correct headers.
     
-
 Result
 ------
 

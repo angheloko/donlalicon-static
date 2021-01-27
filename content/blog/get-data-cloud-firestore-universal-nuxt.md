@@ -24,27 +24,25 @@ In this article, we will retrieve data from Firestore from 2 commonly used metho
 2.  `asyncData`
     
 
-And we'll also be using 2 different styles:
+And we'll also be using 2 different styles for each method:
 
 1.  Using promises
     
 2.  Using `async/await`.
     
 
-Prerequisites
--------------
+## Prerequisites
 
 *   [Create a Nuxt plugin](https://donlalicon.dev/blog/connecting-universal-nuxtjs-firebase) to integrate our app with Firebase.
     
 
-Within any Vue instance lifecycle
----------------------------------
+## Within any Vue instance lifecycle
 
 In our previous article, we injected the Firebase object into the Vue instance. This allows us to access the Firebase object via `this` anywhere in the instance's lifecycle, such as in the `mounted` method or in any custom methods defined in the `methods` property.
 
 ### Using promises
 
-```
+```js
 export default {
   data () {
     return {
@@ -71,7 +69,7 @@ export default {
 
 ### Using async/await
 
-```
+```js
 export default {
   data () {
     return {
@@ -95,8 +93,7 @@ export default {
 }
 ```
 
-Using the asyncData method
---------------------------
+## Using the asyncData method
 
 Since the `asyncData` method runs before the Vue instance is initialised, we don't have access to `this` yet. However, in our [previous article](https://donlalicon.dev/blog/connecting-universal-nuxtjs-firebase), we also injected the Firebase object into the `context` object. This allows us to access the Firebase object via [context](https://nuxtjs.org/api/context#the-context) parameter.
 
@@ -106,7 +103,7 @@ The value returned by this method will be merged with any data defined in the `d
 
 ### Returning a promise
 
-```
+```js
 asyncData ({ app }) {
   const teasers = []
   const db = app.$firebase.firestore()
@@ -129,7 +126,7 @@ asyncData ({ app }) {
 
 ### Using async/await
 
-```
+```js
  async asyncData ({ app }) {
   const teasers = []
   const db = app.$firebase.firestore()
@@ -152,13 +149,13 @@ asyncData ({ app }) {
 }
 ```
 
-### Why pre-render data
+### Why pre-render data on the server?
 
 We need to pre-render data on the server whenever we need information to be present immediately inside our initial HTML response. This is useful for making our pages SEO-friendly since we can the content is present in the initial HTML response. In traditional single-page applications, the content of the page usually comes after the initial HTMl is rendered.
 
 ### Setting header data and important content on the server
 
-```
+```js
 <template>
   <div>{{ blog.body }}</div>
 </template>
@@ -218,8 +215,7 @@ The code above does the following on the server:
 3.  Use the data in the content.
     
 
-Conclusion
-----------
+## Conclusion
 
 Using Firestore seemed like a breeze to me. It is a convenient, low-cost, low-maintenance data storage solution. Its documentation is clear and abundant, and its community vibrant.
 

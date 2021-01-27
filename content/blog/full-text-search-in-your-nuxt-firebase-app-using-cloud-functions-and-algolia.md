@@ -104,7 +104,7 @@ Vue.use(InstantSearch)
 
 We can then start using the plugin, along with all of Algolia's [Vue components](https://www.algolia.com/doc/api-reference/widgets/vue/). In the code below, the [ais-instant-search](https://www.algolia.com/doc/api-reference/widgets/instantsearch/vue/), [ais-autocomplete](https://www.algolia.com/doc/api-reference/widgets/autocomplete/vue/), and [ais-highlight](https://www.algolia.com/doc/api-reference/widgets/highlight/vue/) are all components from library.
 
-```js
+```vue
 <template>
   <client-only>
     <ais-instant-search

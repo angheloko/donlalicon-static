@@ -28,7 +28,7 @@ The snippet below demonstrates the use of this technique. In addition, a preview
 
 I'm using [Tailwind CSS](https://tailwindcss.com/). You can refer to its [documentation](https://tailwindcss.com/docs/utility-first) for the effects of the CSS classes used.
 
-```
+```vue
 <template>
   <div class="mb-4">
     <label for="imageUrl">Image</label>
@@ -78,7 +78,7 @@ A few things that might need some clarification are the use of `$refs` and `$fir
 
 The **$firebase** is the [Firebase object](https://firebase.google.com/docs/web/setup) that we've injected with the use of [plugins](https://nuxtjs.org/guide/plugins/). You can know more about how this was done by reading my previous post about [connecting a Nuxt application with Firebase](https://donlalicon.dev/blog/connecting-universal-nuxtjs-firebase).
 
-```
+```js
 export default {
   data () {
     return {

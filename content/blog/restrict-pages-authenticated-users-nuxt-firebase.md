@@ -18,15 +18,15 @@ A common feature for websites is being able to authenticate users and restrict a
 
 [Firebase Authentication](https://firebase.google.com/docs/auth) provides an easy way to store and authenticate your users, and integrating it with your Nuxt application is fairly straightforward.
 
-cookie-parser
+cookieparser
 -------------
 
-We will need the help of the [cookie-parser](https://github.com/expressjs/cookie-parser) module to easily read cookie values on the server. While it seems that the module is meant to be used with [Express](https://expressjs.com/), we can safely use it since Nuxt uses [Connect](https://github.com/senchalabs/connect), which is compatible with the module.
+We will need the help of the [cookieparser](https://www.npmjs.com/package/cookieparser) module to easily read cookie values on the server. While it seems that the module is meant to be used with [Express](https://expressjs.com/), we can safely use it since Nuxt uses [Connect](https://github.com/senchalabs/connect), which is compatible with the module.
 
 To install the cookie-parser module:
 
 ```
-npm i cookie-parser
+npm i cookieparser
 ```
 
 Firebase plugin
@@ -36,7 +36,7 @@ In a [previous article](https://donlalicon.dev/blog/connecting-universal-nuxtjs-
 
 `plugins/firebase.js`:
 
-```
+```js[plugins/firebase.js]
 import firebase from 'firebase/app'
 
 // Add the Firebase products that you want to use
@@ -85,7 +85,7 @@ The best way to store application state is via [Vuex](https://vuex.vuejs.org/gui
 
 `store/index.js`:
 
-```
+```js[store/index.js]
 const cookieParser = process.server ? require('cookieparser') : undefined
 
 export const state = () => {
@@ -153,7 +153,7 @@ We authenticate users using their [email address and password](https://firebase.
 
 `pages/login.vue`:
 
-```
+```vue[pages/login.vue]
 <template>
   <form @submit.prevent>
     <div>
@@ -216,7 +216,7 @@ Middleware
 
 `middleware/authenticated-access.js`:
 
-```
+```js[middleware/authenticated-access.js]
 export default function ({ store, redirect }) {
   if (!store.state.auth) {
     return redirect('/login')
@@ -235,7 +235,7 @@ To restrict access to a page, we simply need to set the [middleware property](ht
 
 Example `pages/restricted.vue`:
 
-```
+```vue[pages/restricted.vue]
 <template>
   <div>
     This is a restricted page.

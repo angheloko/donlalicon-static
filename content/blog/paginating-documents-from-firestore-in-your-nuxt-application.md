@@ -37,7 +37,7 @@ In the infinite scroll method, more content is automatically loaded as the user 
 
 The code below has been edited for brevity but you can view the [full code](https://github.com/angheloko/donlalicon/blob/master/pages/index.vue). Be sure to check the inline comments for more information.
 
-```
+```vue
 <script>
 export default {
   data () {

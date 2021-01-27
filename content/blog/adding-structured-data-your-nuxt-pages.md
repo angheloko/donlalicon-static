@@ -20,7 +20,7 @@ tags:
 
 You can add structured data by using the [JSON-LD](https://json-ld.org/) format. Below is an example of a structured data for a simple article:
 
-```
+```html
 <script type="application/ld+json">
 {
   "@type": "Article",
@@ -41,7 +41,7 @@ I decided to add the structure data inside the `<head>` section of the page so n
 
 Since I was adding a script tag, I ended up with the following (trimmed for brevity):
 
-```
+```html
 <script>
 export default {
   head () {
@@ -80,7 +80,7 @@ If for some reason you are stuck with an older version of Vue Meta, you can stil
 
 Example of how the earlier code will be adjusted:
 
-```
+```js
 return {
   __dangerouslyDisableSanitizers: ['script'],
   script: [

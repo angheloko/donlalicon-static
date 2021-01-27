@@ -21,7 +21,7 @@ Compose file
 
 The compose file below will execute any script that is located in the host directory mounted to `/docker-entrypoint-initdb.d`:
 
-```
+```yml
 version: '3'
 services:
   db:
@@ -43,7 +43,7 @@ I consider it best practice to use environment variables where sensible. For ins
 
 In the compose file, we set the custom environment variables `DATABASE_USERNAME`, `DATABASE_PASSWORD`, and the database names of each sub-site in the database service. It is then easy to use the same environment variables on the Drupal service.
 
-```
+```yml
 version: '3'
 services:
   db:
@@ -79,7 +79,7 @@ Now that we're setting the environment variables in the compose file, we can use
 
 For instance, we can use the environment variables in a shell script that creates the database user as well as the necessary databases for our sub-sites:
 
-```
+```bash
 #!/bin/bash
 
 set -eo pipefail
@@ -101,7 +101,7 @@ for DATABASE_NAME in $DATABASE_NAME_SITE_A $DATABASE_NAME_SITE_B; do
 done
 ```
 
-Note that the `mysql_note` and `docker_process_sql` are all existing functions. See [https://github.com/docker-library/mysql/blob/6952c5d5a9889311157362c528d65dc2e37ff660/5.7/docker-entrypoint.sh](https://github.com/docker-library/mysql/blob/6952c5d5a9889311157362c528d65dc2e37ff660/5.7/docker-entrypoint.sh).
+Note that the `mysql_note` and `docker_process_sql` are all existing functions. See https://github.com/docker-library/mysql/blob/6952c5d5a9889311157362c528d65dc2e37ff660/5.7/docker-entrypoint.sh.
 
 Re-initializing databases
 -------------------------

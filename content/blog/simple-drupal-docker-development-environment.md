@@ -30,7 +30,7 @@ Drupal image
 
 For this setup, we'll only need one `Dockerfile`, which will be used to build the main image for our Drupal container.
 
-```
+```docker
 FROM drupal:latest
 
 # Install MySQL client so we can use drush from inside the container, among other things.
@@ -66,7 +66,7 @@ If you haven't come across, [Docker Compose](https://docs.docker.com/compose/) b
 
 For our setup, our Compose file, named `docker-compose.yml`, looks like this:
 
-```
+```yaml
 version: '3.3'
 
 services:
@@ -112,7 +112,7 @@ Instead of using an existing image, like what we did with the database service, 
 
 You may have also noticed that we defined the `environment` option in a similar way as what we did in the database service. Being able to set our containers' [environment variables](https://docs.docker.com/compose/environment-variables/) is one of the best benefits of using Docker. This allows us to pass the same database credentials we used in our database service into our Drupal service. We can then change the database variable initialization in the `settings.php` to:
 
-```
+```php
 <?php
 
 $databases['default']['default'] = [

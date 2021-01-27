@@ -26,7 +26,7 @@ Essentially, we want to be able to use the [Firebase Javascript library](https:/
 
 The plugin file `plugins/firebase.js`:
 
-```
+```js[plugins/firebase.js]
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
@@ -65,7 +65,7 @@ Nuxt Configuration
 
 After creating the file, we need to make Nuxt aware of it by adding it into our `nuxt.config.js` file:
 
-```
+```js[nuxt.config.js]
 /*
 ** Plugins to load before mounting the App
 */
@@ -83,7 +83,7 @@ Since we made the Firebase object accessible across the app, using it becomes st
 
 Whenever you have access to the `context` object like in the `asyncData` method, you can access the Firebase object like so:
 
-```
+```js
 export default {
   async asyncData (context) {
     const db = context.app.$firebase.firestore()
@@ -93,7 +93,7 @@ export default {
 
 Or when `context` parameter is deconstructed:
 
-```
+```js
 export default {
   async asyncData ({ app }) {
     const db = app.$firebase.firestore()
@@ -105,7 +105,7 @@ export default {
 
 Once within the Vue instance lifecycle you can access the Firebase object via `this`:
 
-```
+```js
 export default {
   mounted () {
     const db = this.$firebase.firestore()
@@ -117,7 +117,7 @@ export default {
 
 You can also access the Firebase object via `this` when in the Vuex store:
 
-```
+```js
 export const mutations = {
   changeSomeValue (state, newValue) {
     const db = this.$firebase.firestore()

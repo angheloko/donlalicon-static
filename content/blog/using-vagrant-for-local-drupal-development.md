@@ -41,7 +41,7 @@ You can configure how your VM is setup via a configuration file. The configurati
 
 Below is an example of a `config.yml` file. The full configuration options that you can override can be found in [default.config.yml](https://github.com/geerlingguy/drupal-vm/blob/master/default.config.yml). It's recommended to only include the values you want to override.
 
-```
+```yml
 # Update the hostname to the local development environment hostname.
 vagrant_hostname: local.headless-lightning.com
 vagrant_machine_name: headless-lightning

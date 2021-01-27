@@ -39,15 +39,15 @@ Decreasing the number of requests you send to the server is one of the things yo
 
 Some modules that can also contribute to and enhance your decoupled Drupal are:
 
-#### [Simple OAuth](https://www.drupal.org/project/simple_oauth)
+**[Simple OAuth](https://www.drupal.org/project/simple_oauth)**
 
 Authenticates incoming requests using OAuth 2.0.
 
-#### [Consumers](https://www.drupal.org/project/consumers)
+**[Consumers](https://www.drupal.org/project/consumers)**
 
 With this module, you can identify and provide certain features to a specific application that connects to your decoupled Drupal.
 
-#### [Paragraphs](https://www.drupal.org/project/paragraphs)
+**[Paragraphs](https://www.drupal.org/project/paragraphs)**
 
 Let's you define and customize complex nested data structures. In a component-based web application, this module will surely come in handy.
 

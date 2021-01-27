@@ -48,7 +48,7 @@ We will build on top of the [previous article's codes](https://donlalicon.dev/bl
 
 The code below has been edited for brevity but you can view the [full code](https://github.com/angheloko/donlalicon/blob/master/components/BlogForm.vue) from the repo. Be sure to check the inline comments for more information.
 
-```
+```js
 export default {
   data () {
     return {

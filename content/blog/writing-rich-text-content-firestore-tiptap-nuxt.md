@@ -33,7 +33,7 @@ When creating a new document, you have the option to provide your own unique ID 
 
 The basic code for creating or overwriting a document is:
 
-```
+```js
 const data = {
   title: 'Writing Rich-Text Content to Cloud Firestore With Tiptap and Nuxt',
   body: '<p>tiptap is a renderless rich-text editor for Vue.js</p>'
@@ -48,7 +48,7 @@ In the example above, we are writing a new document with the ID `writing-rich-te
 
 To let Firestore generate the ID for you, simply use the `add` method instead:
 
-```
+```js
 const docRef = await db.collection('blogs').add(data)
 
 console.log('New document ID', docRef.id)
@@ -58,7 +58,7 @@ console.log('New document ID', docRef.id)
 
 If you simply want to update certain fields of an existing document, you can use the `update` method.
 
-```
+```js
 const docRef = db.collection('blogs').id('writing-rich-text-content-firestore-tiptap-nuxt')
 
 docRef.update({
@@ -68,7 +68,7 @@ docRef.update({
 
 You'll also most likely find a need to check if a document exists or not. You can do that by getting the document snapshot of the reference and using the `exists` property:
 
-```
+```js
 const snapshot = await db.collection('blogs').id('writing-rich-text-content-firestore-tiptap-nuxt').get()
 
 if (snapshot.exists) {

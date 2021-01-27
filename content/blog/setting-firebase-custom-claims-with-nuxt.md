@@ -38,7 +38,7 @@ You'll need to install [Express](https://expressjs.com/) to make setting up our 
 
 Define the custom server middleware in the Nuxt config file. This code lets any HTTP request sent to `/set-custom-claims` be handled by our custom middleware.
 
-```
+```js[nuxt.config.js]
 serverMiddleware: [
   {
     path: '/set-custom-claims',
@@ -49,7 +49,7 @@ serverMiddleware: [
 
 `serverMiddleware/firebase-admin.js`
 
-```
+```js[serverMiddleware/firebase-admin.js]
 const admin = require('firebase-admin')
 module.exports = admin.initializeApp({
   credential: admin.credential.applicationDefault()
@@ -62,7 +62,7 @@ This is just a way to organize the code. We separate the code responsible for in
 
 This is where we do our heavy lifting. Refer to the comments in the code for details on what it does.
 
-```
+```js[serverMiddleware/set-custom-claims.js]
 const express = require('express');
 const admin = require('./firebase-admin');
 
@@ -111,7 +111,7 @@ Accessing the claims on the client
 
 To access the decoded token on the client, simply call the [getIdTokenResult()](https://firebase.google.com/docs/reference/js/firebase.User.html#getidtokenresult) function:
 
-```
+```js
 firebase.auth().currentUser.getIdTokenResult().then((idTokenResult) => {
   // Check if the user is an admin.
   if (!!idTokenResult.claims.admin) {
@@ -133,7 +133,7 @@ It's a good idea to observe token changes so that our application can react to i
 
 Define a new plugin. Plugins are code that you want to always run so this is a good place for our observer.
 
-```
+```js[nuxt.config.js]
 plugins: [
   {
     src: '~/plugins/firebase-token-change-listener.js',
@@ -146,7 +146,7 @@ plugins: [
 
 Whenever the current user's ID token changes, we dispatch a [Vuex action](https://vuex.vuejs.org/guide/actions.html).
 
-```
+```js[plugins/firebase-token-change-listener.js]
 import { auth } from '../services/firebase'
 
 export default ({ store }) => {
@@ -160,7 +160,7 @@ export default ({ store }) => {
 
 It's a good idea to organize code in a way that will let us reuse them.
 
-```
+```js[services/firebase.js]
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
@@ -177,7 +177,7 @@ export default firebase
 
 This is where we handle storage of our user's custom claims. The `refreshToken` action is called whenever the current user's ID token changes.
 
-```
+```js[store/index.js]
 export const state = () => ({
   admin: false
 })
@@ -218,7 +218,7 @@ Now that we store the current user's `admin` attribute via [Vuex](https://vuex.v
 
 ### In a component or page
 
-```
+```js
 import { mapGetters } from 'vuex'
 
 export default {
@@ -242,7 +242,7 @@ This is useful if you want to guard restricted pages. Page [middlewares](https:/
 
 `middleware/admin-guard.js`
 
-```
+```js[middleware/admin-guard.js]
 export default ({ store, error }) => {
   if (!!store.state.admin) {
     error({
@@ -255,7 +255,7 @@ export default ({ store, error }) => {
 
 `pages/admin.vue`
 
-```
+```vue[pages/admin.vue]
 <template>
   <div>
     Admin only area
