@@ -18,7 +18,7 @@
       <img :src="blog.cover.image" :alt="blog.cover.alt">
       <figcaption v-html="blog.cover.caption" />
     </figure>
-    <nav>
+    <nav v-if="blog.toc.length > 1">
       <ul class="px-4 my-4">
         <li v-for="link of blog.toc" :key="link.id" class="pb-2 pl-1" :class="{ 'ml-5': link.depth === 3 }">
           <NuxtLink :to="`#${link.id}`" class="no-underline">
