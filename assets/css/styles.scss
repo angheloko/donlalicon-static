@@ -59,7 +59,7 @@ p code {
 }
 
 .nuxt-content-highlight {
-  @apply mb-4;
+  @apply mb-4 relative;
 }
 
 .nuxt-content-highlight .filename {
