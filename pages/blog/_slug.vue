@@ -28,6 +28,7 @@
       </ul>
     </nav>
     <nuxt-content :document="blog" class="my-8" />
+    <prev-next :prev="prev" :next="next" class="mt-16" />
   </article>
 </template>
 <script>
@@ -38,7 +39,17 @@ export default {
   }) {
     const blog = await $content('blog', params.slug).fetch()
 
-    return { blog }
+    const [prev, next] = await $content('blog')
+      .only(['title', 'slug', 'createdAt'])
+      .sortBy('createdAt', 'asc')
+      .surround(params.slug)
+      .fetch()
+
+    return {
+      blog,
+      prev,
+      next
+    }
   },
   head () {
     const url = `https://donlalicon.dev/blog/${this.blog.slug}`
