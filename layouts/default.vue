@@ -1,9 +1,10 @@
 <template>
   <div class="flex flex-col min-h-screen">
-    <header class="p-4 border-b shadow-sm fixed w-full z-10 bg-white">
+    <header class="p-4 border-b shadow-sm fixed w-full z-10 bg-white flex justify-between">
       <NuxtLink to="/" class="font-mono font-bold text-2xl text-gray-800 no-underline hover:text-gray-800">
         // donlalicon.dev
       </NuxtLink>
+      <search-box />
     </header>
     <main class="flex-grow pt-32 pb-8 px-4 max-w-screen-md mx-auto w-full">
       <Nuxt />
