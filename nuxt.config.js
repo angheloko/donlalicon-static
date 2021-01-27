@@ -69,7 +69,9 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
-    '@nuxt/content'
+    '@nuxt/content',
+    // https://sitemap.nuxtjs.org/
+    '@nuxtjs/sitemap'
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -85,6 +87,16 @@ export default {
       prism: {
         theme: 'prismjs/themes/prism-okaidia.css'
       }
+    }
+  },
+
+  // Sitemap module configuration: https://sitemap.nuxtjs.org/guide/configuration
+  sitemap: {
+    hostname: 'https://donlalicon.dev',
+    routes () {
+      const { $content } = require('@nuxt/content')
+      return $content({ deep: true }).only(['path']).fetch()
+        .then(files => files.map(file => (file.path === '/index' ? '/' : file.path)))
     }
   },
 
