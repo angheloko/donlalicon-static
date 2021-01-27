@@ -15,7 +15,30 @@ tags:
   - Firestore
   - Pagination
 ---
-<p>Websites with a lot of content will offer a way to paginate it's content, either via infinite scroll, "Load more" button, or page numbers, and doing this with Firestore is pretty straightforward. Firestore uses <a href="https://firebase.google.com/docs/firestore/query-data/query-cursors" rel="noopener noreferrer nofollow">query cursors</a> to define the starting and ending point of your query, which is very different from how one would do it with traditional relational databases where you use offsets and limits.</p><p>According to the documentation, you can use <a href="https://firebase.google.com/docs/firestore/query-data/query-cursors#add_a_simple_cursor_to_a_query" rel="noopener noreferrer nofollow">scalar values</a> or a <a href="https://firebase.google.com/docs/firestore/query-data/query-cursors#use_a_document_snapshot_to_define_the_query_cursor" rel="noopener noreferrer nofollow">document snapshot</a> as a cursor. I personally prefer using a document snapshot since I feel it's more precise and can avoid issues with documents that have fields with the same values.</p><p>For this article, we will use the <a href="https://www.smashingmagazine.com/2013/05/infinite-scrolling-lets-get-to-the-bottom-of-this/" rel="noopener noreferrer nofollow">infinite scroll</a> method to page through our documents. This is the same technique that is used for <a href="https://github.com/angheloko/donlalicon/blob/master/pages/index.vue" rel="noopener noreferrer nofollow">this website</a>.</p><h2>Infinite scrolling and loading</h2><p>In the infinite scroll method, more content is automatically loaded as the user approaches the bottom of the page. So basically, we'll need to do the following:</p><ol><li><p>Detect if the user has scrolled to or is nearing the bottom of the page. </p></li><li><p>If the user has reached or is near the end of the page, load the next batch of documents.</p></li><li><p>Keep track of the last document that was loaded so we can use it as our starting point for the next batch of documents to load.</p></li><li><p>If all documents have been loaded, do nothing.</p></li></ol><p>The code below has been edited for brevity but you can view the <a href="https://github.com/angheloko/donlalicon/blob/master/pages/index.vue" rel="noopener noreferrer nofollow">full code</a>. Be sure to check the inline comments for more information.</p><pre><code>&lt;script&gt;
+Websites with a lot of content will offer a way to paginate it's content, either via infinite scroll, "Load more" button, or page numbers, and doing this with Firestore is pretty straightforward. Firestore uses [query cursors](https://firebase.google.com/docs/firestore/query-data/query-cursors) to define the starting and ending point of your query, which is very different from how one would do it with traditional relational databases where you use offsets and limits.
+
+According to the documentation, you can use [scalar values](https://firebase.google.com/docs/firestore/query-data/query-cursors#add_a_simple_cursor_to_a_query) or a [document snapshot](https://firebase.google.com/docs/firestore/query-data/query-cursors#use_a_document_snapshot_to_define_the_query_cursor) as a cursor. I personally prefer using a document snapshot since I feel it's more precise and can avoid issues with documents that have fields with the same values.
+
+For this article, we will use the [infinite scroll](https://www.smashingmagazine.com/2013/05/infinite-scrolling-lets-get-to-the-bottom-of-this/) method to page through our documents. This is the same technique that is used for [this website](https://github.com/angheloko/donlalicon/blob/master/pages/index.vue).
+
+Infinite scrolling and loading
+------------------------------
+
+In the infinite scroll method, more content is automatically loaded as the user approaches the bottom of the page. So basically, we'll need to do the following:
+
+1.  Detect if the user has scrolled to or is nearing the bottom of the page.
+    
+2.  If the user has reached or is near the end of the page, load the next batch of documents.
+    
+3.  Keep track of the last document that was loaded so we can use it as our starting point for the next batch of documents to load.
+    
+4.  If all documents have been loaded, do nothing.
+    
+
+The code below has been edited for brevity but you can view the [full code](https://github.com/angheloko/donlalicon/blob/master/pages/index.vue). Be sure to check the inline comments for more information.
+
+```
+<script>
 export default {
   data () {
     return {
@@ -61,7 +84,7 @@ export default {
 
       this.eof = querySnapshot.empty
 
-      if (querySnapshot.size &gt; 0) {
+      if (querySnapshot.size > 0) {
         // Keep track of the last loaded document.
         this.lastDoc = querySnapshot.docs[querySnapshot.docs.length - 1]
 
@@ -82,14 +105,18 @@ export default {
       const padding = 100
 
       const bottomOfWindow =
-        elementBounds.bottom &lt;=
+        elementBounds.bottom <=
         (window.innerHeight || document.documentElement.clientHeight) + padding
 
-      if (bottomOfWindow &amp;&amp; !this.isLoading &amp;&amp; !this.eof) {
+      if (bottomOfWindow && !this.isLoading && !this.eof) {
         this.loadBlogs()
       }
     }
   }
 }
-&lt;/script&gt;
-</code></pre><p>This code works well especially in a <a href="https://nuxtjs.org/guide/views#pages" rel="noopener noreferrer nofollow">page component</a> since the <a href="https://012.vuejs.org/api/instance-properties.html#vm-\$el" rel="noopener noreferrer nofollow">$el</a> property would refer the whole page.</p><p>You can see this code in action by visiting the <a href="https://donlalicon.dev/" rel="noopener noreferrer nofollow">homepage</a> and you can view the <a href="https://github.com/angheloko/donlalicon/blob/master/pages/index.vue" rel="noopener noreferrer nofollow">full code here</a>.</p><p></p>
+</script>
+```
+
+This code works well especially in a [page component](https://nuxtjs.org/guide/views#pages) since the [$el](https://012.vuejs.org/api/instance-properties.html#vm-\$el) property would refer the whole page.
+
+You can see this code in action by visiting the [homepage](https://donlalicon.dev/) and you can view the [full code here](https://github.com/angheloko/donlalicon/blob/master/pages/index.vue).

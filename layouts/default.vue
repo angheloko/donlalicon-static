@@ -5,7 +5,7 @@
         // donlalicon.dev
       </NuxtLink>
     </header>
-    <main class="flex-grow pt-24 pb-8 px-4 max-w-screen-md mx-auto">
+    <main class="flex-grow pt-32 pb-8 px-4 max-w-screen-md mx-auto w-full">
       <Nuxt />
     </main>
     <footer class="flex text-sm text-gray-600 justify-center p-4 bg-gray-100">

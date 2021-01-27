@@ -15,21 +15,105 @@ tags:
   - Nuxt
   - tiptap
 ---
-<p>Writing to Cloud Firestore is just as easy as reading from it. But what if you want to save data directly from your Nuxt application to cloud Firestore? What if you wanted to save rich-text content?</p><h2>tiptap</h2><p>There are a number of rich-text editors out there and the one that I've selected for my website was <a href="https://tiptap.scrumpy.io/" rel="noopener noreferrer nofollow">tiptap</a> mainly because it's built precisely for Vue.js, it's fully extendable and is renderless. In addition, the <a href="https://tiptap.scrumpy.io/docs" rel="noopener noreferrer nofollow">documentation</a> and <a href="https://github.com/scrumpy/tiptap/tree/master/examples" rel="noopener noreferrer nofollow">examples</a> are clear, which just makes using it all the more pleasant.</p><h2>Writing the content into Cloud Firestore</h2><p>As mentioned earlier, writing into Firestore is just as easy as reading from it. The <a href="https://firebase.google.com/docs/reference/js/firebase.firestore" rel="noopener noreferrer nofollow">documentation</a> and <a href="https://firebase.google.com/docs/firestore/quickstart" rel="noopener noreferrer nofollow">examples</a> from the Firebase team are an excellent source for information so I'll just be providing some brief examples here.</p><p>When creating a new document, you have the option to provide your own unique ID or let Firestore automatically generate one for you.</p><h3>Writing a document</h3><p>The basic code for creating or overwriting a document is:</p><pre><code>const data = {
+Writing to Cloud Firestore is just as easy as reading from it. But what if you want to save data directly from your Nuxt application to cloud Firestore? What if you wanted to save rich-text content?
+
+tiptap
+------
+
+There are a number of rich-text editors out there and the one that I've selected for my website was [tiptap](https://tiptap.scrumpy.io/) mainly because it's built precisely for Vue.js, it's fully extendable and is renderless. In addition, the [documentation](https://tiptap.scrumpy.io/docs) and [examples](https://github.com/scrumpy/tiptap/tree/master/examples) are clear, which just makes using it all the more pleasant.
+
+Writing the content into Cloud Firestore
+----------------------------------------
+
+As mentioned earlier, writing into Firestore is just as easy as reading from it. The [documentation](https://firebase.google.com/docs/reference/js/firebase.firestore) and [examples](https://firebase.google.com/docs/firestore/quickstart) from the Firebase team are an excellent source for information so I'll just be providing some brief examples here.
+
+When creating a new document, you have the option to provide your own unique ID or let Firestore automatically generate one for you.
+
+### Writing a document
+
+The basic code for creating or overwriting a document is:
+
+```
+const data = {
   title: 'Writing Rich-Text Content to Cloud Firestore With Tiptap and Nuxt',
-  body: '&lt;p&gt;tiptap is a renderless rich-text editor for Vue.js&lt;/p&gt;'
+  body: '<p>tiptap is a renderless rich-text editor for Vue.js</p>'
 }
 
 const id = 'writing-rich-text-content-firestore-tiptap-nuxt';
 
-db.collection('blogs').doc(id).set(data)</code></pre><p>In the example above, we are writing a new document with the ID <code>writing-rich-text-content-firestore-tiptap-nuxt</code>. If a document with that ID already exists, it will be overwritten.</p><p>To let Firestore generate the ID for you, simply use the <code>add</code> method instead:</p><pre><code>const docRef = await db.collection('blogs').add(data)
+db.collection('blogs').doc(id).set(data)
+```
 
-console.log('New document ID', docRef.id)</code></pre><h3>Updating an existing document</h3><p>If you simply want to update certain fields of an existing document, you can use the <code>update</code> method.</p><pre><code>const docRef = db.collection('blogs').id('writing-rich-text-content-firestore-tiptap-nuxt')
+In the example above, we are writing a new document with the ID `writing-rich-text-content-firestore-tiptap-nuxt`. If a document with that ID already exists, it will be overwritten.
+
+To let Firestore generate the ID for you, simply use the `add` method instead:
+
+```
+const docRef = await db.collection('blogs').add(data)
+
+console.log('New document ID', docRef.id)
+```
+
+### Updating an existing document
+
+If you simply want to update certain fields of an existing document, you can use the `update` method.
+
+```
+const docRef = db.collection('blogs').id('writing-rich-text-content-firestore-tiptap-nuxt')
 
 docRef.update({
   title: 'Writing Rich-Text Content to Cloud Firestore With Tiptap and Nuxt'
-})</code></pre><p>You'll also most likely find a need to check if a document exists or not. You can do that by getting the document snapshot of the reference and using the <code>exists</code> property:</p><pre><code>const snapshot = await db.collection('blogs').id('writing-rich-text-content-firestore-tiptap-nuxt').get()
+})
+```
+
+You'll also most likely find a need to check if a document exists or not. You can do that by getting the document snapshot of the reference and using the `exists` property:
+
+```
+const snapshot = await db.collection('blogs').id('writing-rich-text-content-firestore-tiptap-nuxt').get()
 
 if (snapshot.exists) {
   console.log('Document exists')
-}</code></pre><h2>Putting it all together</h2><p>I wanted the bare minimum experience for writing online; The experience didn't have to be <em>medium</em>-like but it still had to be bearable especially since I'll be spending a lot of time here. I wanted a WYSIWYG editor and also wanted to be able to set the title, description, and other properties of the blog in one form.</p><p>Below is a screenshot of the editor that I've implemented for my blog. Being able to see how the article will look like is an important feature of any rich-text content editor and tiptap certainly delivers on that regard.</p><p><img src="https://firebasestorage.googleapis.com/v0/b/donlalicon.appspot.com/o/writing-rich-text-content-firestore-tiptap-nuxt%2Fblog%20form.png?alt=media&amp;token=73bd7ab3-7cd4-4b24-92a4-27ebc5361a98">You can check how I'm using tiptap for my blog and what customisations I've made from the <a href="https://github.com/angheloko/donlalicon/blob/master/components/Editor.vue" rel="noopener noreferrer nofollow">source</a>.</p><h3>The components</h3><h4>Icon components</h4><p>For the editor menubar icons, I decided to use Material Design Icons. I downloaded the SVG versions of the icons that I needed and converted them into Vue components. Of course, directly including the Material Design Icons font works but I opted with just using what I needed.</p><p>You can see all the <a href="https://github.com/angheloko/donlalicon/tree/master/components/icons" rel="noopener noreferrer nofollow">icon components</a> used for the editor menubar from the repo.</p><h4>Editor component</h4><p>The editor component wraps the tiptap editor and contains some customisations. You can view the full <a href="https://github.com/angheloko/donlalicon/blob/master/components/Editor.vue" rel="noopener noreferrer nofollow">source code</a> of this component from the repo.</p><p>The implementation is pretty straightforward and follows closely tiptap's basic <a href="https://tiptap.scrumpy.io/" rel="noopener noreferrer nofollow">examples</a>. Something that's important to note, especially since we're using Nuxt, is how we initialise the editor. Instead of initialising the editor in the <code>data</code> property, we do it on the <code>mounted</code> event. This is because the <code>mounted</code> event also runs on the server-side and tiptap needs access to the document object, which server-side rendering doesn't have.</p><p>Another thing that you may have noticed in the code is that we've implemented some custom commands for inserting images and links.</p><p>It's obvious that there's a fair work for setting up tiptap but in exchange you get lots of control over almost every aspect of the editor, from its look and feel, to custom commands.</p><h4>Blog form component</h4><p>This is where we do a lot of the heavy-lifting. This is where we add the editor component as well as allow other blog fields to be edited. This is also where we save and delete our document in Firestore.</p><p>You can view the full <a href="https://github.com/angheloko/donlalicon/blob/master/components/BlogForm.vue" rel="noopener noreferrer nofollow">source code</a> of this component from the repo.</p><h3>The pages</h3><p>With the blog form component, it was easy to create the pages where I can <a href="https://github.com/angheloko/donlalicon/blob/master/pages/new.vue" rel="noopener noreferrer nofollow">create</a> and <a href="https://github.com/angheloko/donlalicon/blob/master/pages/blog/_id/edit.vue" rel="noopener noreferrer nofollow">edit</a> blogs with very minimal code duplication. You can view the <a href="https://github.com/angheloko/donlalicon/tree/master/pages" rel="noopener noreferrer nofollow">source code</a> for both pages from the repo.</p><h2>Final words</h2><p>Both Firestore and tiptap offered plenty of documentation and examples to work with, which made the developer experience a great one. Implementing both into my website was both fun and informative. If you'll ever need a rich-text content editor for your next Nuxt website, I highly recommend tiptap.</p><p></p>
+}
+```
+
+Putting it all together
+-----------------------
+
+I wanted the bare minimum experience for writing online; The experience didn't have to be _medium_\-like but it still had to be bearable especially since I'll be spending a lot of time here. I wanted a WYSIWYG editor and also wanted to be able to set the title, description, and other properties of the blog in one form.
+
+Below is a screenshot of the editor that I've implemented for my blog. Being able to see how the article will look like is an important feature of any rich-text content editor and tiptap certainly delivers on that regard.
+
+![](https://firebasestorage.googleapis.com/v0/b/donlalicon.appspot.com/o/writing-rich-text-content-firestore-tiptap-nuxt%2Fblog%20form.png?alt=media&token=73bd7ab3-7cd4-4b24-92a4-27ebc5361a98)You can check how I'm using tiptap for my blog and what customisations I've made from the [source](https://github.com/angheloko/donlalicon/blob/master/components/Editor.vue).
+
+### The components
+
+#### Icon components
+
+For the editor menubar icons, I decided to use Material Design Icons. I downloaded the SVG versions of the icons that I needed and converted them into Vue components. Of course, directly including the Material Design Icons font works but I opted with just using what I needed.
+
+You can see all the [icon components](https://github.com/angheloko/donlalicon/tree/master/components/icons) used for the editor menubar from the repo.
+
+#### Editor component
+
+The editor component wraps the tiptap editor and contains some customisations. You can view the full [source code](https://github.com/angheloko/donlalicon/blob/master/components/Editor.vue) of this component from the repo.
+
+The implementation is pretty straightforward and follows closely tiptap's basic [examples](https://tiptap.scrumpy.io/). Something that's important to note, especially since we're using Nuxt, is how we initialise the editor. Instead of initialising the editor in the `data` property, we do it on the `mounted` event. This is because the `mounted` event also runs on the server-side and tiptap needs access to the document object, which server-side rendering doesn't have.
+
+Another thing that you may have noticed in the code is that we've implemented some custom commands for inserting images and links.
+
+It's obvious that there's a fair work for setting up tiptap but in exchange you get lots of control over almost every aspect of the editor, from its look and feel, to custom commands.
+
+#### Blog form component
+
+This is where we do a lot of the heavy-lifting. This is where we add the editor component as well as allow other blog fields to be edited. This is also where we save and delete our document in Firestore.
+
+You can view the full [source code](https://github.com/angheloko/donlalicon/blob/master/components/BlogForm.vue) of this component from the repo.
+
+### The pages
+
+With the blog form component, it was easy to create the pages where I can [create](https://github.com/angheloko/donlalicon/blob/master/pages/new.vue) and [edit](https://github.com/angheloko/donlalicon/blob/master/pages/blog/_id/edit.vue) blogs with very minimal code duplication. You can view the [source code](https://github.com/angheloko/donlalicon/tree/master/pages) for both pages from the repo.
+
+Final words
+-----------
+
+Both Firestore and tiptap offered plenty of documentation and examples to work with, which made the developer experience a great one. Implementing both into my website was both fun and informative. If you'll ever need a rich-text content editor for your next Nuxt website, I highly recommend tiptap.

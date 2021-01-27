@@ -16,4 +16,42 @@ tags:
   - JSONAPI
   - Headless CMS
 ---
-<p>There are many reasons to decouple a Drupal website and as new front-end frameworks and libraries such as Vue.js and React become increasingly popular, the idea of decoupling a Drupal website becomes more appealing. Besides obtaining front-end freedom, reasons related to scalability, performance, and reusability make this move more compelling. Here are some ways on how to get you started on the decoupled path.</p><h2>Essential modules</h2><h3>JSONAPI</h3><p>The <a href="https://www.drupal.org/docs/8/core/modules/jsonapi-module" rel="noopener noreferrer nofollow">JSON:API</a> module has been part of core since 8.7. This module exposes REST APIs for every entity type in your Drupal application using the <a href="https://jsonapi.org/" rel="noopener noreferrer nofollow">JSON:API specification</a>. As someone who has developed custom web APIs before for Drupal applications, using this module prevents a lot of bike-shedding while offering almost everything you need out of the box.</p><h3>Decoupled router</h3><p>One of the biggest nuances in a decoupled architecture is route management. In my opinion, this stems from the fact that route management is easily handled by the CMS but as soon as we decouple content management and content presentation, issues like this arise.</p><p>The <a href="https://www.drupal.org/project/decoupled_router" rel="noopener noreferrer nofollow">Decoupled router</a> module tackles this issue by resolving paths and locating the content that the path eventually leads to. This module works very well even with aliases and redirects.</p><h3>Subrequests</h3><p>Decreasing the number of requests you send to the server is one of the things you can do to optimize your web application and the module <a href="https://www.drupal.org/project/subrequests" rel="noopener noreferrer nofollow">Subrequests</a> lets your Drupal-backed web application handle multiple requests contained in a single request.</p><h3>Other modules</h3><p>Some modules that can also contribute to and enhance your decoupled Drupal are:</p><h4><a href="https://www.drupal.org/project/simple_oauth" rel="noopener noreferrer nofollow">Simple OAuth</a></h4><p>Authenticates incoming requests using OAuth 2.0.</p><h4><a href="https://www.drupal.org/project/consumers" rel="noopener noreferrer nofollow">Consumers</a></h4><p>With this module, you can identify and provide certain features to a specific application that connects to your decoupled Drupal.</p><h4><a href="https://www.drupal.org/project/paragraphs" rel="noopener noreferrer nofollow">Paragraphs</a></h4><p>Let's you define and customize complex nested data structures. In a component-based web application, this module will surely come in handy.</p><h2>Distributions</h2><p>If you need a distribution that's built and optimized for a decoupled architecture, you can choose between <a href="https://www.contentacms.org/" rel="noopener noreferrer nofollow">Contenta CMS</a> and <a href="https://github.com/acquia/headless_lightning" rel="noopener noreferrer nofollow">Headless Lightning</a>.</p><p></p><h3></h3>
+There are many reasons to decouple a Drupal website and as new front-end frameworks and libraries such as Vue.js and React become increasingly popular, the idea of decoupling a Drupal website becomes more appealing. Besides obtaining front-end freedom, reasons related to scalability, performance, and reusability make this move more compelling. Here are some ways on how to get you started on the decoupled path.
+
+Essential modules
+-----------------
+
+### JSONAPI
+
+The [JSON:API](https://www.drupal.org/docs/8/core/modules/jsonapi-module) module has been part of core since 8.7. This module exposes REST APIs for every entity type in your Drupal application using the [JSON:API specification](https://jsonapi.org/). As someone who has developed custom web APIs before for Drupal applications, using this module prevents a lot of bike-shedding while offering almost everything you need out of the box.
+
+### Decoupled router
+
+One of the biggest nuances in a decoupled architecture is route management. In my opinion, this stems from the fact that route management is easily handled by the CMS but as soon as we decouple content management and content presentation, issues like this arise.
+
+The [Decoupled router](https://www.drupal.org/project/decoupled_router) module tackles this issue by resolving paths and locating the content that the path eventually leads to. This module works very well even with aliases and redirects.
+
+### Subrequests
+
+Decreasing the number of requests you send to the server is one of the things you can do to optimize your web application and the module [Subrequests](https://www.drupal.org/project/subrequests) lets your Drupal-backed web application handle multiple requests contained in a single request.
+
+### Other modules
+
+Some modules that can also contribute to and enhance your decoupled Drupal are:
+
+#### [Simple OAuth](https://www.drupal.org/project/simple_oauth)
+
+Authenticates incoming requests using OAuth 2.0.
+
+#### [Consumers](https://www.drupal.org/project/consumers)
+
+With this module, you can identify and provide certain features to a specific application that connects to your decoupled Drupal.
+
+#### [Paragraphs](https://www.drupal.org/project/paragraphs)
+
+Let's you define and customize complex nested data structures. In a component-based web application, this module will surely come in handy.
+
+Distributions
+-------------
+
+If you need a distribution that's built and optimized for a decoupled architecture, you can choose between [Contenta CMS](https://www.contentacms.org/) and [Headless Lightning](https://github.com/acquia/headless_lightning).

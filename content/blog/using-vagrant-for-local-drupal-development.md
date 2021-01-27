@@ -15,7 +15,34 @@ tags:
   - Vagrant
   - DrupalVM
 ---
-<p>In a previous article, I wrote about <a href="https://donlalicon.dev/blog/simple-drupal-docker-development-environment" rel="noopener noreferrer nofollow">developing Drupal with Docker</a>. In this article, we'll look into another popular option for your Drupal development environment.</p><h2>Drupal VM</h2><p><a href="https://www.drupalvm.com/" rel="noopener noreferrer nofollow">Drupal VM</a> is a tool for setting up a development environment in a virtual machine using <a href="https://www.vagrantup.com/intro/index.html" rel="noopener noreferrer nofollow">Vagrant</a>. In addition to simplifying the setup process, it also automatically installs and sets up common tools and libraries found in most Drupal-based projects such as <a href="http://www.drush.org/" rel="noopener noreferrer nofollow">Drush</a>, <a href="https://drupalconsole.com/" rel="noopener noreferrer nofollow">Drupal Console</a>, and <a href="https://nodejs.org/en/" rel="noopener noreferrer nofollow">Node.js</a>.</p><h2>Getting started</h2><p>The only prerequisite is to install <a href="https://www.vagrantup.com/downloads.html" rel="noopener noreferrer nofollow">Vagrant</a>, <a href="https://www.virtualbox.org/wiki/Downloads" rel="noopener noreferrer nofollow">VirtualBox</a>, and <a href="https://getcomposer.org/" rel="noopener noreferrer nofollow">Composer</a>. It is also assumed that you have a Composer-based Drupal project or is using Composer to manage your dependencies.</p><h3>Install as a Composer dependecy</h3><p>There are <a href="https://github.com/geerlingguy/drupal-vm#quick-start-guide" rel="noopener noreferrer nofollow">multiple ways</a> on how to use Drupal VM in your project. My favorite is installing Drupal VM as a Composer dependency.</p><pre><code>composer require --dev geerlingguy/drupal-vm</code></pre><h3>Create a configuration file</h3><p>You can configure how your VM is setup via a configuration file. The configuration file must be named <code>config.yml</code> although you can save it anywhere you want.</p><p>Below is an example of a <code>config.yml</code> file. The full configuration options that you can override can be found in <a href="https://github.com/geerlingguy/drupal-vm/blob/master/default.config.yml" rel="noopener noreferrer nofollow">default.config.yml</a>. It's recommended to only include the values you want to override.</p><pre><code># Update the hostname to the local development environment hostname.
+In a previous article, I wrote about [developing Drupal with Docker](https://donlalicon.dev/blog/simple-drupal-docker-development-environment). In this article, we'll look into another popular option for your Drupal development environment.
+
+Drupal VM
+---------
+
+[Drupal VM](https://www.drupalvm.com/) is a tool for setting up a development environment in a virtual machine using [Vagrant](https://www.vagrantup.com/intro/index.html). In addition to simplifying the setup process, it also automatically installs and sets up common tools and libraries found in most Drupal-based projects such as [Drush](http://www.drush.org/), [Drupal Console](https://drupalconsole.com/), and [Node.js](https://nodejs.org/en/).
+
+Getting started
+---------------
+
+The only prerequisite is to install [Vagrant](https://www.vagrantup.com/downloads.html), [VirtualBox](https://www.virtualbox.org/wiki/Downloads), and [Composer](https://getcomposer.org/). It is also assumed that you have a Composer-based Drupal project or is using Composer to manage your dependencies.
+
+### Install as a Composer dependecy
+
+There are [multiple ways](https://github.com/geerlingguy/drupal-vm#quick-start-guide) on how to use Drupal VM in your project. My favorite is installing Drupal VM as a Composer dependency.
+
+```
+composer require --dev geerlingguy/drupal-vm
+```
+
+### Create a configuration file
+
+You can configure how your VM is setup via a configuration file. The configuration file must be named `config.yml` although you can save it anywhere you want.
+
+Below is an example of a `config.yml` file. The full configuration options that you can override can be found in [default.config.yml](https://github.com/geerlingguy/drupal-vm/blob/master/default.config.yml). It's recommended to only include the values you want to override.
+
+```
+# Update the hostname to the local development environment hostname.
 vagrant_hostname: local.headless-lightning.com
 vagrant_machine_name: headless-lightning
 
@@ -47,7 +74,17 @@ drupal_core_path: "/var/www/headless-lightning/docroot"
 drupal_db_user: drupal
 drupal_db_password: drupal
 drupal_db_name: drupal
-drupal_db_host: localhost</code></pre><h3>Create a delegating Vagrantfile</h3><p>A delegating <code>Vagrantfile</code> catches all <code>vagrant</code> commands that you run in your project directory and passes them to Drupal VM's own <code>Vagrantfile</code>.</p><p>Below is how a delegating <code>Vagrantfile</code> would look like:</p><pre><code># The absolute path to the root directory of the project. Both Drupal VM and
+drupal_db_host: localhost
+```
+
+### Create a delegating Vagrantfile
+
+A delegating `Vagrantfile` catches all `vagrant` commands that you run in your project directory and passes them to Drupal VM's own `Vagrantfile`.
+
+Below is how a delegating `Vagrantfile` would look like:
+
+```
+# The absolute path to the root directory of the project. Both Drupal VM and
 # the config file need to be contained within this path.
 ENV['DRUPALVM_PROJECT_ROOT'] = "#{__dir__}"
 
@@ -59,10 +96,32 @@ ENV['DRUPALVM_CONFIG_DIR'] = "box"
 ENV['DRUPALVM_DIR'] = "vendor/geerlingguy/drupal-vm"
 
 # Load the real Vagrantfile
-load "#{__dir__}/#{ENV['DRUPALVM_DIR']}/Vagrantfile"</code></pre><h3>Build your VM</h3><p>Finally, in your project's root directory, run:</p><pre><code>vagrant up</code></pre><p>Note that this process will take a few minutes. At the end you should see something similar to this:</p><pre><code>==&gt; headless-lightning: Machine 'headless-lightning' has a post `vagrant up` message. This is a message
-==&gt; headless-lightning: from the creator of the Vagrantfile, and not from Vagrant itself:
-==&gt; headless-lightning: 
-==&gt; headless-lightning: Your Drupal VM Vagrant box is ready to use!
-==&gt; headless-lightning: * Visit the dashboard for an overview of your site: http://dashboard.local.headless-lightning.com (or http://192.168.72.228)
-==&gt; headless-lightning: * You can SSH into your machine with `vagrant ssh`.
-==&gt; headless-lightning: * Find out more in the Drupal VM documentation at http://docs.drupalvm.com</code></pre><p>You can now access your site!</p><h2>Final words</h2><p>I intentionally didn't compare using Drupal VM and Docker. Honestly, I liked both and I usually include both options in my projects.</p>
+load "#{__dir__}/#{ENV['DRUPALVM_DIR']}/Vagrantfile"
+```
+
+### Build your VM
+
+Finally, in your project's root directory, run:
+
+```
+vagrant up
+```
+
+Note that this process will take a few minutes. At the end you should see something similar to this:
+
+```
+==> headless-lightning: Machine 'headless-lightning' has a post `vagrant up` message. This is a message
+==> headless-lightning: from the creator of the Vagrantfile, and not from Vagrant itself:
+==> headless-lightning: 
+==> headless-lightning: Your Drupal VM Vagrant box is ready to use!
+==> headless-lightning: * Visit the dashboard for an overview of your site: http://dashboard.local.headless-lightning.com (or http://192.168.72.228)
+==> headless-lightning: * You can SSH into your machine with `vagrant ssh`.
+==> headless-lightning: * Find out more in the Drupal VM documentation at http://docs.drupalvm.com
+```
+
+You can now access your site!
+
+Final words
+-----------
+
+I intentionally didn't compare using Drupal VM and Docker. Honestly, I liked both and I usually include both options in my projects.

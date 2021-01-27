@@ -1,5 +1,10 @@
 <template>
   <article>
+    <div v-if="blog.tags" class="uppercase text-xs font-bold text-gray-600">
+      <div v-for="tag of blog.tags.slice(0).sort()" :key="tag" class="mr-2 inline-block">
+        {{ tag }}
+      </div>
+    </div>
     <h1>
       {{ blog.title }}
     </h1>

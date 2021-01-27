@@ -24,7 +24,7 @@ p {
 
 ul,
 ol {
-  @apply pl-8 my-4;
+  @apply pl-8 mt-4 mb-8;
 }
 
 ul {
@@ -45,27 +45,37 @@ blockquote {
   @apply border-l-4 border-gray-600 italic pl-4;
 }
 
+figure img {
+  @apply w-full;
+}
+
 figcaption {
   @apply text-sm text-gray-600 text-center;
 }
 
+p code {
+  display: inline-block;
+  @apply font-bold;
+}
+
 .nuxt-content-highlight {
-  @apply relative mb-4;
+  @apply mb-4;
 }
 
 .nuxt-content-highlight .filename {
   @apply absolute right-0 text-gray-600 z-10 mr-2 mt-2 text-sm;
 }
+
 .nuxt-content {
   h2 {
-    @apply text-2xl font-serif mb-2;
+    @apply text-3xl mb-2;
   }
 
   h3 {
-    @apply text-lg mb-2;
+    @apply text-xl mb-2;
   }
 
   img {
-    @apply mx-auto;
+    @apply mx-auto w-full;
   }
 }

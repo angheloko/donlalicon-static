@@ -16,7 +16,40 @@ tags:
   - Firebase
   - Cloud Storage
 ---
-<p>In the <a href="https://donlalicon.dev/blog/uploading-images-to-firebase-cloud-storage-with-nuxt" rel="noopener noreferrer nofollow">previous article</a>, we talked about uploading files to <a href="https://firebase.google.com/docs/storage" rel="noopener noreferrer nofollow">Firebase Cloud Storage</a> using the <a href="https://firebase.google.com/docs/reference/js" rel="noopener noreferrer nofollow">Firebase Javascript SDK</a> in a Nuxt-based web application. In this article, we will look into how to optimize and resize an image before uploading it.</p><h2>Canvas API</h2><p>According to <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" rel="noopener noreferrer nofollow">MDN</a>:</p><blockquote><p>The <strong>Canvas API</strong> provides a means for drawing graphics via <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" rel="noopener noreferrer nofollow">JavaScript</a> and the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" rel="noopener noreferrer nofollow">HTML</a> <code>&lt;canvas&gt;</code> element. Among other things, it can be used for animation, game graphics, data visualization, photo manipulation, and real-time video processing.</p></blockquote><p>Going through the documentation, the Canvas API seems to be ideal for manipulating images on the browser. Since our goal is to <strong>optimize</strong> and <strong>resize</strong> an image, the basic steps we need are:</p><ol><li><p>Resize the image using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage" rel="noopener noreferrer nofollow">drawImage()</a> function.</p></li><li><p>Optimize the image using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob" rel="noopener noreferrer nofollow">toBlob()</a> function.</p></li></ol><h2>Application</h2><p>I decided to use this process for my blog. My blog uses 2 images - a cover image and a thumbnail version of the cover. Rather than having to manually resize the images, it would be ideal if all I had to do is upload a single image and let the application create the thumbnail variation that has a width of 640px. In addition, the original image should also be resized to a more reasonable size such as a width of 1280px.</p><p>We will build on top of the <a href="https://donlalicon.dev/blog/uploading-images-to-firebase-cloud-storage-with-nuxt" rel="noopener noreferrer nofollow">previous article's codes</a>. The template stays the same but the Javascript has been refactored so that it does the following:</p><ol><li><p>Create a resized optimized version of the original image to be used as the cover.</p></li><li><p>Create a resized optimized version of the original image to be used as the thumbnail.</p></li><li><p>Upload both versions to Firebase Cloud Firestore and store the download URLs in blog.</p></li></ol><p>The code below has been edited for brevity but you can view the <a href="https://github.com/angheloko/donlalicon/blob/master/components/BlogForm.vue" rel="noopener noreferrer nofollow">full code</a> from the repo. Be sure to check the inline comments for more information.</p><pre><code>export default {
+In the [previous article](https://donlalicon.dev/blog/uploading-images-to-firebase-cloud-storage-with-nuxt), we talked about uploading files to [Firebase Cloud Storage](https://firebase.google.com/docs/storage) using the [Firebase Javascript SDK](https://firebase.google.com/docs/reference/js) in a Nuxt-based web application. In this article, we will look into how to optimize and resize an image before uploading it.
+
+Canvas API
+----------
+
+According to [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API):
+
+> The **Canvas API** provides a means for drawing graphics via [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) and the [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) `<canvas>` element. Among other things, it can be used for animation, game graphics, data visualization, photo manipulation, and real-time video processing.
+
+Going through the documentation, the Canvas API seems to be ideal for manipulating images on the browser. Since our goal is to **optimize** and **resize** an image, the basic steps we need are:
+
+1.  Resize the image using the [drawImage()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage) function.
+    
+2.  Optimize the image using the [toBlob()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob) function.
+    
+
+Application
+-----------
+
+I decided to use this process for my blog. My blog uses 2 images - a cover image and a thumbnail version of the cover. Rather than having to manually resize the images, it would be ideal if all I had to do is upload a single image and let the application create the thumbnail variation that has a width of 640px. In addition, the original image should also be resized to a more reasonable size such as a width of 1280px.
+
+We will build on top of the [previous article's codes](https://donlalicon.dev/blog/uploading-images-to-firebase-cloud-storage-with-nuxt). The template stays the same but the Javascript has been refactored so that it does the following:
+
+1.  Create a resized optimized version of the original image to be used as the cover.
+    
+2.  Create a resized optimized version of the original image to be used as the thumbnail.
+    
+3.  Upload both versions to Firebase Cloud Firestore and store the download URLs in blog.
+    
+
+The code below has been edited for brevity but you can view the [full code](https://github.com/angheloko/donlalicon/blob/master/components/BlogForm.vue) from the repo. Be sure to check the inline comments for more information.
+
+```
+export default {
   data () {
     return {
       blog: {},
@@ -54,12 +87,12 @@ tags:
       }
 
       // Generate the cover.
-      const fullImageResizePromise = new Promise((resolve, reject) =&gt; {
+      const fullImageResizePromise = new Promise((resolve, reject) => {
         this.generateVariation(file, this.FULL_IMAGE.maxDimension, this.FULL_IMAGE.quality, resolve)
       })
 
       // Generate the thumbnail.
-      const thumbImageResizePromise = new Promise((resolve, reject) =&gt; {
+      const thumbImageResizePromise = new Promise((resolve, reject) => {
         this.generateVariation(file, this.THUMB_IMAGE.maxDimension, this.THUMB_IMAGE.quality, resolve)
       })
       
@@ -76,11 +109,11 @@ tags:
 
       // Once both files have been uploaded, update the blog details.
       return Promise.all([fullImageUploadPromise, thumbImageUploadPromise])
-        .then((results) =&gt; {
+        .then((results) => {
           this.blog.imageUrl = results[0]
           this.blog.teaserImageUrl = results[1]
         })
-        .finally(() =&gt; {
+        .finally(() => {
           this.isUploadingImage = false
         })
     },
@@ -90,13 +123,13 @@ tags:
       const storage = this.$firebase.storage()
       const imageRef = storage.ref(`images/${filename}`)
 
-      const uploadTask = imageRef.put(blob, metadata).then((snapshot) =&gt; {
+      const uploadTask = imageRef.put(blob, metadata).then((snapshot) => {
         // Once the image is uploaded, obtain the download URL, which
         // is the publicly accessible URL of the image.
-        return snapshot.ref.getDownloadURL().then((url) =&gt; {
+        return snapshot.ref.getDownloadURL().then((url) => {
           return url
         })
-      }).catch((error) =&gt; {
+      }).catch((error) => {
         // eslint-disable-next-line no-console
         console.error('Error uploading image', error)
       })
@@ -105,10 +138,10 @@ tags:
     },
     generateVariation (file, maxDimension, quality, cb) {
       // Create an image element that will store our optimized image.
-      const displayPicture = (url) =&gt; {
+      const displayPicture = (url) => {
         const image = new Image()
         image.src = url
-        image.onload = () =&gt; {
+        image.onload = () => {
           const canvas = this.getScaledCanvas(image, maxDimension)
           
           // Once we have the resized image, further optimize it using
@@ -118,7 +151,7 @@ tags:
       }
 
       const reader = new FileReader()
-      reader.onload = e =&gt; displayPicture(e.target.result)
+      reader.onload = e => displayPicture(e.target.result)
       reader.readAsDataURL(file)
     },
     getScaledCanvas (image, maxDimension) {
@@ -126,8 +159,8 @@ tags:
       // drawImage() function.
       const scaledCanvas = document.createElement('canvas')
 
-      if (image.width &gt; maxDimension || image.height &gt; maxDimension) {
-        if (image.width &gt; image.height) {
+      if (image.width > maxDimension || image.height > maxDimension) {
+        if (image.width > image.height) {
           scaledCanvas.width = maxDimension
           scaledCanvas.height = (maxDimension * image.height) / image.width
         } else {
@@ -154,4 +187,10 @@ tags:
       return scaledCanvas
     }
   }
-}</code></pre><h2>Alternatives</h2><p>If you are using Firebase, you can choose to optimize the images using <a href="https://firebase.google.com/docs/functions" rel="noopener noreferrer nofollow">Cloud Functions</a>. <a href="https://github.com/firebase/functions-samples/tree/master/quickstarts/thumbnails" rel="noopener noreferrer nofollow">This approach</a> performs the optimization on the server automatically whenever a new image is uploaded. There's even a <a href="https://firebase.google.com/products/extensions/storage-resize-images" rel="noopener noreferrer nofollow">prebuilt function</a> that you can immediately use without any coding. It is definitely worth checking out. </p>
+}
+```
+
+Alternatives
+------------
+
+If you are using Firebase, you can choose to optimize the images using [Cloud Functions](https://firebase.google.com/docs/functions). [This approach](https://github.com/firebase/functions-samples/tree/master/quickstarts/thumbnails) performs the optimization on the server automatically whenever a new image is uploaded. There's even a [prebuilt function](https://firebase.google.com/products/extensions/storage-resize-images) that you can immediately use without any coding. It is definitely worth checking out.

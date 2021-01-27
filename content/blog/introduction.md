@@ -13,4 +13,14 @@ cover:
 tags: 
   - misc
 ---
-<p>Hi, I'm <strong>Don Lalicon</strong>, a web developer currently working in Singapore. I've worked with various languages and frameworks; Worked on both sides of the spectrum and everything in between. Recently, I've been working a lot with Drupal, PHP, Vue.js, and Nuxt.js.</p><p>I've always liked the idea of having a blog where I can share my thoughts, stories, and ideas. A way to share and flex my expertise and, at the same time, learn and improve my shortcomings.</p><p>For a start, I'll be sharing my experiences in developing this website and <a href="https://lakbay.in" rel="noopener noreferrer nofollow">Lakbay.in</a>, an itinerary sharing website. I developed both websites using Nuxt, Firebase, and other popular open-source libraries.</p><p>I'll also be sharing my experiences on other topics such as Drupal and PHP or anything I get to work on that I think people might find interesting in the realm of web development.</p><p>And if you're interested in the source code of this website or just want to take a peek under the hood, <a href="https://github.com/angheloko/donlalicon" rel="noopener noreferrer nofollow">it's completely open-source</a>!</p><p>Stay tuned!</p>
+Hi, I'm **Don Lalicon**, a web developer currently working in Singapore. I've worked with various languages and frameworks; Worked on both sides of the spectrum and everything in between. Recently, I've been working a lot with Drupal, PHP, Vue.js, and Nuxt.js.
+
+I've always liked the idea of having a blog where I can share my thoughts, stories, and ideas. A way to share and flex my expertise and, at the same time, learn and improve my shortcomings.
+
+For a start, I'll be sharing my experiences in developing this website and [Lakbay.in](https://lakbay.in), an itinerary sharing website. I developed both websites using Nuxt, Firebase, and other popular open-source libraries.
+
+I'll also be sharing my experiences on other topics such as Drupal and PHP or anything I get to work on that I think people might find interesting in the realm of web development.
+
+And if you're interested in the source code of this website or just want to take a peek under the hood, [it's completely open-source](https://github.com/angheloko/donlalicon)!
+
+Stay tuned!
