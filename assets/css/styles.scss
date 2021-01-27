@@ -46,7 +46,7 @@ blockquote {
 }
 
 figcaption {
-  @apply text-sm text-gray-700 text-center;
+  @apply text-sm text-gray-600 text-center;
 }
 
 .nuxt-content-highlight {
@@ -57,12 +57,8 @@ figcaption {
   @apply absolute right-0 text-gray-600 z-10 mr-2 mt-2 text-sm;
 }
 .nuxt-content {
-  h1 {
-    @apply text-2xl font-serif mb-2;
-  }
-
   h2 {
-    @apply text-xl mb-2;
+    @apply text-2xl font-serif mb-2;
   }
 
   h3 {

@@ -8,7 +8,7 @@
     <main class="flex-grow pt-24 pb-8 px-4 max-w-screen-md mx-auto">
       <Nuxt />
     </main>
-    <footer class="flex text-sm text-gray-700 justify-center p-4 bg-gray-100">
+    <footer class="flex text-sm text-gray-600 justify-center p-4 bg-gray-100">
       <div>
         © Don Lalicon 2019 - {{ currentYear }}
       </div>
