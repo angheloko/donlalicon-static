@@ -19,7 +19,7 @@ a:hover {
 }
 
 p {
-  @apply mb-4;
+  @apply mb-8;
 }
 
 ul,
@@ -56,28 +56,16 @@ figcaption {
 .nuxt-content-highlight .filename {
   @apply absolute right-0 text-gray-600 z-10 mr-2 mt-2 text-sm;
 }
+.nuxt-content {
+  h1 {
+    @apply text-2xl font-serif mb-2;
+  }
 
-.blog {
   h2 {
-    @apply text-gray-700;
+    @apply text-xl mb-2;
   }
 
-  &__date {
-    @apply text-sm text-gray-600;
-  }
-  &__content {
-    @apply my-8;
-
-    h1 {
-      @apply text-2xl font-serif mb-2;
-    }
-
-    h2 {
-      @apply text-xl mb-2;
-    }
-
-    h3 {
-      @apply text-lg mb-2;
-    }
+  h3 {
+    @apply text-lg mb-2;
   }
 }

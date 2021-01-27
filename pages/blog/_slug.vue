@@ -1,12 +1,12 @@
 <template>
-  <article class="blog">
+  <article>
     <h1>
       {{ blog.title }}
     </h1>
-    <h2>
+    <h2 class="text-gray-700">
       {{ blog.lead }}
     </h2>
-    <div class="blog__date">
+    <div class="text-sm text-gray-600">
       {{ blog.createdAt | toDate }}
     </div>
     <figure>
@@ -15,7 +15,7 @@
         {{ blog.cover.caption }}
       </figcaption>
     </figure>
-    <nuxt-content :document="blog" class="blog__content" />
+    <nuxt-content :document="blog" class="my-8" />
   </article>
 </template>
 <script>
