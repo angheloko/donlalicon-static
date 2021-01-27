@@ -27,7 +27,7 @@ Indexing with Cloud Functions
 
 Since we want to index our content, the events that we're interested are those triggered when a new content is created, updated, and/or deleted. For this we can use the [**onWrite**](https://firebase.google.com/docs/reference/functions/providers_firestore_.documentbuilder.html#on-write) event. The code below is [based on how this blog indexes its content using Cloud Functions](https://github.com/angheloko/donlalicon/blob/master/functions/index.js#L8).
 
-```
+```js
 exports.indexBlog = functions.firestore.document('blogs/{blogId}').onWrite((change, context) => {
   // "document" will be empty if it's deleted, otherwise, this contains
   // the updated values.
@@ -95,9 +95,7 @@ For this blog, I went with option 2 since using the Vue library not only handles
 
 Once you've installed the [Vue library](https://www.algolia.com/doc/guides/building-search-ui/installation/vue/), we'll need to create a [Nuxt plugin](https://nuxtjs.org/guide/plugins/) for it:
 
-`plugins/vue-instantsearch.js`
-
-```
+```js[plugins/vue-instantsearch.js]
 import Vue from 'vue'
 import InstantSearch from 'vue-instantsearch'
 
@@ -106,7 +104,7 @@ Vue.use(InstantSearch)
 
 We can then start using the plugin, along with all of Algolia's [Vue components](https://www.algolia.com/doc/api-reference/widgets/vue/). In the code below, the [ais-instant-search](https://www.algolia.com/doc/api-reference/widgets/instantsearch/vue/), [ais-autocomplete](https://www.algolia.com/doc/api-reference/widgets/autocomplete/vue/), and [ais-highlight](https://www.algolia.com/doc/api-reference/widgets/highlight/vue/) are all components from library.
 
-```
+```js
 <template>
   <client-only>
     <ais-instant-search
