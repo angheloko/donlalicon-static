@@ -68,4 +68,8 @@ figcaption {
   h3 {
     @apply text-lg mb-2;
   }
+
+  img {
+    @apply mx-auto;
+  }
 }
