@@ -62,7 +62,7 @@ export default {
       datePublished: dateCreated.toISOString(),
       dateModified: dateChanged.toISOString(),
       headline: this.blog.title,
-      image: this.blog.cover.image
+      image: this.blog.cover ? this.blog.cover : ''
     }
 
     const head = {

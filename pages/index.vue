@@ -6,9 +6,8 @@
       :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
       class="block mb-8 bg-gray-100 border border-gray-200 shadow-sm rounded no-underline text-gray-800 transition-colors duration-300 ease-linear hover:text-gray-800 hover:bg-gray-200 sm:flex sm:flex-row-reverse sm:p-4"
     >
-      <div class="sm:flex-shrink-0 sm:w-1/4 sm:ml-4">
+      <div v-if="blog.cover" class="sm:flex-shrink-0 sm:w-1/4 sm:ml-4">
         <img
-          v-if="blog.cover"
           :src="blog.cover.thumb"
           :alt="blog.cover.alt"
           class="h-auto rounded-t object-cover sm:rounded-none"
