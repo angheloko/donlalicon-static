@@ -53,6 +53,11 @@ export default {
     '@/assets/css/styles'
   ],
 
+  // Progress bar: https://nuxtjs.org/docs/2.x/features/loading/
+  loading: {
+    color: 'blue'
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/to-date'
