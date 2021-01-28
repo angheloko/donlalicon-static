@@ -7,6 +7,9 @@ cover:
   alt: New year, new site
   caption: '<span>Photo by <a href="https://unsplash.com/@goian?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Ian Schneider</a> on <a href="https://unsplash.com/s/photos/new?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>'
   thumb: https://firebasestorage.googleapis.com/v0/b/donlalicon.appspot.com/o/ian-schneider-PAykYb-8Er8-unsplash-640.jpg?alt=media&token=ff74111f-4a68-4dd4-a3d3-292c97ad7aa1
+tags:
+  - Nuxt Content
+  - Static Website
 ---
 ## Introduction
 My blog's content was originally managed via [Cloud Firestore](https://firebase.google.com/docs/firestore). There is definitely nothing wrong with this approach, and for medium to large applications, I would absolutely recommend using it. However, for small personal sites such as mine, a *static content* driven approach might be more suitable.
