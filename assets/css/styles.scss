@@ -1,5 +1,5 @@
 body {
-  @apply text-gray-800;
+  @apply text-gray-800 text-lg;
 }
 
 h1 {
@@ -67,16 +67,16 @@ p code {
 }
 
 .nuxt-content {
-  h2 {
-    @apply text-3xl mb-2;
+  h1, h2 {
+    @apply font-sans text-4xl mb-2;
   }
 
   h3 {
-    @apply text-2xl mb-2;
+    @apply text-3xl mb-2;
   }
 
   h4 {
-    @apply text-xl mb-2;
+    @apply text-2xl mb-2;
   }
 
   img {
