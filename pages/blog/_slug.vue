@@ -114,12 +114,12 @@ export default {
       }
     )
 
-    if (this.blog.imageUrl) {
+    if (this.blog.cover) {
       head.meta.push({
         hid: 'og:image',
         name: 'og:image',
         property: 'og:image',
-        content: this.blog.imageUrl
+        content: this.blog.cover.image
       })
     }
 
