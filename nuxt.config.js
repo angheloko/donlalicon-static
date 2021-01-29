@@ -88,6 +88,12 @@ export default {
   pwa: {
     manifest: {
       lang: 'en'
+    },
+    meta: {
+      name: 'Don Lalicon - Codesmith',
+      description: 'A personal blog about building stuff with code.',
+      twitterSite: '@DonOrDoNot',
+      twitterCreator: '@DonOrDoNot'
     }
   },
 
