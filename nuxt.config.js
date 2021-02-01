@@ -18,11 +18,6 @@ export default {
         content: 'A personal blog about building stuff with code.'
       }
     ],
-    script: [
-      { src: '/__/firebase/8.2.4/firebase-app.js' },
-      { src: '/__/firebase/8.2.4/firebase-analytics.js' },
-      { src: '/__/firebase/init.js' }
-    ],
     link: [
       {
         rel: 'icon',
