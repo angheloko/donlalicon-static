@@ -1,5 +1,6 @@
 ---
-title: From Dynamic SSR Website to Static Website 
+title: From Dynamic SSR Website to Static Website
+createdAt: 2021-01-29
 subtitle: Where I refactored my blog from an SSR application using Cloud Firestore to a static application
 lead: It's a new year, and I felt like it was time to try something new.
 cover:

@@ -1,5 +1,6 @@
 ---
 title: YourBars - A Goal Tracking App
+createdAt: 2021-01-29
 subtitle: YourBars is a minimalistic, practical, and easy-to-use app for creating and tracking your goals. 
 lead: YourBars is a minimalistic, practical, and easy-to-use app for creating and tracking your goals. 
 description: YourBars is a minimalistic, practical, and easy-to-use app for creating and tracking your goals.

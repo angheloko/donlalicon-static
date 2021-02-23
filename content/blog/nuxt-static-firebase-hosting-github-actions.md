@@ -1,5 +1,6 @@
 ---
 title: Deploy Nuxt on Firebase Hosting with GitHub Actions
+createdAt: 2021-02-23
 subtitle: Automating building and deploying to Firebase Hosting with GitHub Actions.
 cover:
   image: https://firebasestorage.googleapis.com/v0/b/donlalicon.appspot.com/o/pexels-digital-buggu-171198.jpg?alt=media&token=e06bf63b-bf9e-4870-ad6c-51d99e90c8f9
