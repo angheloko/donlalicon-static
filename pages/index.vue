@@ -9,7 +9,7 @@
       <div v-if="blog.cover" class="sm:flex-shrink-0 sm:w-1/4 sm:ml-4">
         <img
           :src="blog.cover.thumb"
-          :alt="blog.cover.alt"
+          :alt="blog.cover.alt ? blog.cover.alt : blog.title"
           class="h-auto rounded-t object-cover sm:rounded-none"
         >
       </div>
