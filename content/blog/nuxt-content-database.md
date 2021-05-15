@@ -1,5 +1,7 @@
 ---
 title: Using Nuxt Content as a database
+createdAt: 2021-05-15
+updatedAt: 2021-05-15
 description: Using Nuxt Content as a database
 cover:
   image: "https://firebasestorage.googleapis.com/v0/b/donlalicon.appspot.com/o/nuxt-content.png?alt=media&token=1a1cf59d-2405-417a-a849-63a28061206b"

@@ -1,5 +1,7 @@
 ---
 title: "Monster Hunter Rise Set Builder with Nuxt"
+createdAt: 2021-05-13
+updatedAt: 2021-05-13
 description: "Monster Hunter Rise set builder built with Nuxt"
 subtitle: "A weekend project for a perfect weekend of programming and gaming"
 cover:
