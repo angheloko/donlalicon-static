@@ -5,6 +5,8 @@ cover:
   thumb: https://firebasestorage.googleapis.com/v0/b/donlalicon.appspot.com/o/github-pages.jpg?alt=media&token=59f99fcd-79d4-4e33-a0e6-113fb9434c1c
 createdAt: 2021-05-22
 updatedAt: 2021-05-22
+tags:
+  - GitHub Actions
 ---
 
 In a previous article, I talked about [deploying a static Nuxt app to Firebase Hosting](/blog/nuxt-static-firebase-hosting-github-actions). In this article, I'll be sharing about how to deploy a static Nuxt site to GitHub Pages.
@@ -73,3 +75,5 @@ Commit the file and push your changes. Every time you push your changes, GitHub 
 Go to the Settings of your GitHub repository and scroll down to the **Pages** section. In the **GitHub Pages** settings, select the source branch that you created earlier.
 
 ![GitHub Pages settings](https://firebasestorage.googleapis.com/v0/b/donlalicon.appspot.com/o/Screenshot%202021-05-22%20at%2012.00.51%20PM.png?alt=media&token=bb883d11-89dc-4553-a686-878c7bdee32d)
+
+And you're all set! GitHub Pages will use the branch you selected (e.g. `gh-pages`) and where your build artifact will automatically be committed as you continue to develop on your main branch.
